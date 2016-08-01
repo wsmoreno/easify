@@ -2,6 +2,7 @@ set :application, 'easify'
 set :repo_url, 'git@github.com:wsmoreno/easify.git'
 
 set :deploy_to, '/home/deploy/easify'
+set :ssh_options, { :forward_agent => true }
 
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
