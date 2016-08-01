@@ -1,6 +1,21 @@
 source 'https://rubygems.org'
 
 
+
+# Added by Wilson S. Moreno on August 1, 2016pistrano', '~> 3.1.0'
+gem 'carrierwave', '~> 0.11.0'
+gem 'bootstrap-sass', '3.3.6'
+gem 'puma', '3.4.0'
+gem 'capistrano', '~> 3.4.0'
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-rails', '~> 1.1.1'
+gem 'bcrypt', '3.1.11'
+gem 'faker', '1.6.3'
+gem 'will_paginate', '3.1.0'
+gem 'bootstrap-will_paginate', '0.0.10'
+gem 'capistrano-rbenv', github: "capistrano/rbenv"
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record
