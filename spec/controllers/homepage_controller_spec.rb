@@ -12,5 +12,10 @@ RSpec.describe HomepageController, type: :controller do
            get :index
            expect(response).to render_template("index")
         end
+
+        it "renders the homepage layout" do
+           get :index
+           expect(response).to render_template("layouts/homepage")
+        end
      end     
 end

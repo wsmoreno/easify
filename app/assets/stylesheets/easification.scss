@@ -1,2 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+span.brand{
+ font-family: 'Lobster', Georgia, Times, serif;
+ color: #ace600;
+ font-size: 3em;
+}
+
+small.brand{
+ font-family: 'Cabin', Helvetica, Arial, sans-serif;
+}
+ 
