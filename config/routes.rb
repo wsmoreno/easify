@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, class_name: "Easify::Devise::User"
   root 'homepage#index'
 
 

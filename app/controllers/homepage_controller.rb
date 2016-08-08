@@ -1,5 +1,5 @@
 class HomepageController < ApplicationController
-   layout 'homepage'   
+   layout 'homepage'
 
    def index
    end
