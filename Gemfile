@@ -53,6 +53,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'capybara', '~> 2.4'
+  gem 'factory_girl_rails', '~> 4.2.0'
 end
 
 group :development do
