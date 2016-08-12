@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Easify::Hr::CivilStatus, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+     it "should have many Human Resources" do
+        association = Easify::Hr::CivilStatus.reflect_on_association(:human_resources)
+        expect(association.macro).to be(:has_many)
+     end
 end

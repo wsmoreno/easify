@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808061334) do
+ActiveRecord::Schema.define(version: 20160808064016) do
 
   create_table "easify_devise_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -169,8 +169,10 @@ ActiveRecord::Schema.define(version: 20160808061334) do
     t.integer  "easify_sys_user_id",           limit: 4
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.integer  "devise_user_id",               limit: 4
   end
 
+  add_index "easify_hr_human_resources", ["devise_user_id"], name: "fk_rails_a7b7aa479a", using: :btree
   add_index "easify_hr_human_resources", ["easify_hr_citizenship_id"], name: "index_easify_hr_human_resources_on_easify_hr_citizenship_id", using: :btree
   add_index "easify_hr_human_resources", ["easify_hr_city_id"], name: "index_easify_hr_human_resources_on_easify_hr_city_id", using: :btree
   add_index "easify_hr_human_resources", ["easify_hr_civil_status_id"], name: "index_easify_hr_human_resources_on_easify_hr_civil_status_id", using: :btree
@@ -390,6 +392,7 @@ ActiveRecord::Schema.define(version: 20160808061334) do
   add_foreign_key "easify_hr_departments", "easify_hr_human_resources", column: "department_head_id"
   add_foreign_key "easify_hr_educations", "easify_hr_human_resources"
   add_foreign_key "easify_hr_educations", "easify_hr_schools"
+  add_foreign_key "easify_hr_human_resources", "easify_devise_users", column: "devise_user_id"
   add_foreign_key "easify_hr_human_resources", "easify_hr_cities"
   add_foreign_key "easify_hr_human_resources", "easify_hr_citizenships"
   add_foreign_key "easify_hr_human_resources", "easify_hr_civil_statuses"

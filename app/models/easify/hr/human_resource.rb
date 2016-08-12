@@ -1,10 +1,22 @@
 class Easify::Hr::HumanResource < ActiveRecord::Base
-  belongs_to :easify_hr_citizenship
-  belongs_to :easify_hr_city
-  belongs_to :easify_hr_civil_status
-  belongs_to :easify_hr_company
-  belongs_to :easify_hr_department
-  belongs_to :easify_hr_office_location
-  belongs_to :easify_hr_religion
-  belongs_to :easify_sys_user
+  has_one :citizenship, class_name: "Easify::Hr::Citizenship", foreign_key: "citizenship_id"
+  has_one :civil_status, class_name: "Easify::Hr::CivilStatus", foreign_key: "civil_status_id"
+  belongs_to :city, class_name: "Easify::Hr::City", foreign_key: "city_id"
+  belongs_to :religion, class_name: "Easify::Hr::Religion", foreign_key: "religion_id"
+  belongs_to :company, class_name: "Easify::Hr::Company", foreign_key: "company_id"
+  belongs_to :department, class_name: "Easify::Hr::Department", foreign_key: "department_id"
+  belongs_to :supervisor, class_name: "Easify::Hr::Supervisor", foreign_key: "supervisor_id"
+  has_one :office_location, class_name: "Easify::Hr::OfficeLocation", foreign_key: "office_location_id"
+  has_one :user_account, class_name: "Easify::Devise::User", foreign_key: "devise_user_id"
+
+  has_many :relatives, class_name: "Easify::Hr::Relatives", foreign_key: "human_resource_id"
+  has_many :contact_informations, class_name: "Easify::Hr::ContactInformation", foreign_key: "human_resource_id"
+  has_many :supervised_departments, class_name: "Easify::Hr::Department", foreign_key: "human_resource_id"  
+  has_many :supervised_resources, class_name: "Easify::Hr::HumanResource", foreign_key: "department_head_id"
+  has_many :references, class_name: "Easify::Hr::References", foreign_key: "human_resource_id"
+  has_many :educations, class_name: "Easify::Hr::Education", foreign_key: "human_resource_id"
+  has_many :skills, class_name: "Easify::Hr::Skills", foreign_key: "human_resource_id"
+  has_many :trainings, class_name: "Easify::Hr::Trainings", foreign_key: "human_resource_id"
+  has_many :work_experiences, class_name: "Easify::Hr::WorkExperience", foreign_key: "human_resource_id"
+  has_many :tenureships, class_name: "Easify::Hr::Tenureshi", foreign_key: "human_resource_id"
 end
