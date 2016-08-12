@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808064016) do
+ActiveRecord::Schema.define(version: 20160812114124) do
 
   create_table "easify_devise_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -415,6 +415,7 @@ ActiveRecord::Schema.define(version: 20160808064016) do
   add_foreign_key "easify_hr_trainings", "easify_hr_human_resources"
   add_foreign_key "easify_hr_work_experiences", "easify_hr_cities"
   add_foreign_key "easify_hr_work_experiences", "easify_hr_human_resources"
+  add_foreign_key "easify_sys_user_roles", "easify_devise_users", column: "easify_sys_user_id", name: "devise_user_connect_to_roles"
   add_foreign_key "easify_sys_user_roles", "easify_sys_roles"
   add_foreign_key "easify_sys_user_roles", "easify_sys_users"
 end
