@@ -63,7 +63,7 @@ RSpec.describe Easify::Hr::HumanResource, type: :model do
      end
 
      it "supervises many Human Resources" do
-        association = Easify::Hr::HumanResource.reflect_on_association(:supervised_resources)
+        association = Easify::Hr::HumanResource.reflect_on_association(:subordinates)
         expect(association.macro).to be(:has_many)
      end 
 
