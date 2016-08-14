@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Easify::Hr::City, type: :model do
+
     it "should have many Human Resources" do
        association = Easify::Hr::City.reflect_on_association(:human_resources)
        expect(association.macro).to be(:has_many)
@@ -35,4 +36,10 @@ RSpec.describe Easify::Hr::City, type: :model do
        association = Easify::Hr::City.reflect_on_association(:work_experiences)
        expect(association.macro).to be(:has_many)
     end 
+
+    it "does not allow blank name" do
+       city = build(:city, name: "")
+       city.valid?
+       expect(city.errors[:name].size).to eq(1)
+    end
 end
