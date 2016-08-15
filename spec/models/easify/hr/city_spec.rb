@@ -40,6 +40,12 @@ RSpec.describe Easify::Hr::City, type: :model do
     it "does not allow blank name" do
        city = build(:city, name: "")
        city.valid?
-       expect(city.errors[:name].size).to eq(1)
+       expect(city.errors[:name]).to include("can't be blank")
+    end
+
+    it "does not allow blank start_date" do
+       city = build(:city, start_date: "")
+       city.valid?
+       expect(city.errors[:start_date]).to include("can't be blank")
     end
 end
