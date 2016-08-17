@@ -15,6 +15,18 @@ RSpec.describe Easify::Hr::Citizenship, type: :model do
     it "should not allow blank name" do
        citizenship = build(:citizenship, name: "")
        citizenship.valid?
-       expect(citizenship.errors[:name].size).to eq(1)
+       expect(citizenship.errors[:name]).to include("can't be blank")
+    end
+
+    it "should not allow blank country" do
+       citizenship = build(:citizenship)
+       citizenship.valid?
+       expect(citizenship.errors[:country]).to include("can't be blank")
+    end
+
+    it "should not allow blank start date" do
+       citizenship = build(:citizenship, start_date: "")
+       citizenship.valid?
+       expect(citizenship.errors[:start_date]).to include("can't be blank")
     end
 end

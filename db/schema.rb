@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812114124) do
+ActiveRecord::Schema.define(version: 20160815084704) do
 
   create_table "easify_devise_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20160812114124) do
     t.integer  "easify_hr_city_id",         limit: 4
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   add_index "easify_hr_companies", ["easify_hr_city_id"], name: "index_easify_hr_companies_on_easify_hr_city_id", using: :btree
