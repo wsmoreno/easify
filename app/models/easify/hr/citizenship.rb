@@ -1,5 +1,8 @@
 class Easify::Hr::Citizenship < ActiveRecord::Base
-  validates :name, presence: true
+  # TODO create data seeds for Citizenship
+  # TODO validate foreign keys in association
+
+  validates :name, presence: true, uniqueness: true
   validates :country, presence: true
   validates :start_date, presence: true
 

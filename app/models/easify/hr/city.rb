@@ -1,5 +1,7 @@
 class Easify::Hr::City < ActiveRecord::Base
-      validates :name, presence: true
+      # TODO create province model and create association
+
+      validates :name, presence: true, uniqueness: true
       validates :start_date, presence: true
 
       has_many :human_resources, class_name: "Easify::Hr::HumanResource", foreign_key: "easify_hr_city_id"

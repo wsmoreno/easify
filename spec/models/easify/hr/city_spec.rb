@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Easify::Hr::City, type: :model do
 
+    before do
+       build(:city).save
+    end
+
     it "should have many Human Resources" do
        association = Easify::Hr::City.reflect_on_association(:human_resources)
        expect(association.macro).to be(:has_many)
@@ -47,5 +51,11 @@ RSpec.describe Easify::Hr::City, type: :model do
        city = build(:city, start_date: "")
        city.valid?
        expect(city.errors[:start_date]).to include("can't be blank")
+    end
+
+    it "does not allow duplicate name" do
+       city = build(:city)
+       city.valid?
+       expect(city.errors[:name]).to include("has already been taken")
     end
 end

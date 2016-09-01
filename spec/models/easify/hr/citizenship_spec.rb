@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Easify::Hr::Citizenship, type: :model do
-    
+     
+    before do
+       @citizenship = build(:citizenship)
+    end
+
     it "should have many Citizens" do
        association = Easify::Hr::Citizenship.reflect_on_association(:citizens)
        expect(association.macro).to be(:has_many)
@@ -28,5 +32,9 @@ RSpec.describe Easify::Hr::Citizenship, type: :model do
        citizenship = build(:citizenship, start_date: "")
        citizenship.valid?
        expect(citizenship.errors[:start_date]).to include("can't be blank")
+    end
+
+    it "should not allow duplicate names" do
+
     end
 end

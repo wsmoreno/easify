@@ -16,4 +16,10 @@ RSpec.describe Easify::Hr::Department, type: :model do
        association = Easify::Hr::Department.reflect_on_association(:human_resources)
        expect(association.macro).to be(:has_many)
     end
+
+    it "should not allow blank name" do
+       department = build(:department, name: "")
+       department.valid?
+       expect(department.errors[:name]).to include("can't be blank")       
+    end
 end

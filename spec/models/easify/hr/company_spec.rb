@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Easify::Hr::Company, type: :model do
+     
+     before do
+        company = build(:company)
+        company.city = build(:city, name: "Pasig")
+        company.save
+     end
+
      it "should belong to a City" do
         association = Easify::Hr::Company.reflect_on_association(:city)
         expect(association.macro).to be(:belongs_to)
@@ -39,4 +46,10 @@ RSpec.describe Easify::Hr::Company, type: :model do
         company.valid?
         expect(company.errors[:city]).to include("can't be blank")
      end
+
+     it "should not allow duplicate name" do
+        company = build(:company)
+        company.valid?
+        expect(company.errors[:name]).to include("has already been taken")
+     end     
 end

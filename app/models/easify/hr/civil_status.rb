@@ -1,5 +1,9 @@
 class Easify::Hr::CivilStatus < ActiveRecord::Base
-      validates :name, presence: true
+      # TODO add uniqueness validation for name attribute
+      # TODO add method to proper caps name before saving
+      # TODO add database table unique constraint for name column
+
+      validates :name, presence: true, uniqueness: true
       validates :description, presence: true
       validates :start_date, presence: true
 

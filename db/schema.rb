@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20160815084704) do
   create_table "easify_hr_contact_informations", force: :cascade do |t|
     t.date     "end_date"
     t.string   "number_or_address", limit: 255
-    t.date     "start"
+    t.date     "start_date"
     t.integer  "human_resource_id", limit: 4
     t.integer  "contact_type_id",   limit: 4
     t.datetime "created_at",                    null: false

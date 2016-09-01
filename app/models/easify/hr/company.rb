@@ -1,5 +1,6 @@
 class Easify::Hr::Company < ActiveRecord::Base
   validates :name, presence: true
+  validates :name, uniqueness: true
   validates :address1, presence: true
   validates :tax_identification_number, presence: true
   validates :city, presence: true
