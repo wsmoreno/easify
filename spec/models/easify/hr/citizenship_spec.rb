@@ -34,7 +34,7 @@ RSpec.describe Easify::Hr::Citizenship, type: :model do
        expect(citizenship.errors[:start_date]).to include("can't be blank")
     end
 
-    it "should not allow duplicate names" do
-
-    end
+    it "should not allow duplicate names"
+    it "returns human resources of type Easify::Hr:HumanResource"
+    it "returns country of type Easify::Hr::Country"
 end

@@ -51,5 +51,10 @@ RSpec.describe Easify::Hr::Company, type: :model do
         company = build(:company)
         company.valid?
         expect(company.errors[:name]).to include("has already been taken")
-     end     
+     end
+
+     it "should not allow duplicate tin number"
+     it "returns city of type Easify::Hr::City"
+     it "returns human resources of type Easify::Hr::HumanResource"
+     it "returns departments of type Easify::Hr::Department"     
 end

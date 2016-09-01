@@ -22,4 +22,20 @@ RSpec.describe Easify::Hr::Department, type: :model do
        department.valid?
        expect(department.errors[:name]).to include("can't be blank")       
     end
+
+
+    it "should not allow missing department head" do
+       department = build(:department, department_head: nil)
+       department.valid?
+       expect(department.errors[:department_head]).to include("can't be blank")
+    end
+
+    it "should not allow missing company" do
+       department = build(:department, company: nil)
+       department.valid?
+       expect(department.errors[:company]).to include("can't be blank")
+    end
+
+    it "returns human resources of type Easify::Hr::HumanResource"
+    it "returns department head of type Easify::Hr::HumanResource"
 end

@@ -7,4 +7,9 @@ RSpec.describe Easify::Hr::ContactType, type: :model do
          expect(association.macro).to be(:has_many)
       end
 
+      it "should not allow blank name"
+      it "should not allow blank start date"
+      it "should not allow blank description"
+      it "should not allow duplicate names"
+      it "returns contact informations of type Easify::Hr::ContactInformation"
 end

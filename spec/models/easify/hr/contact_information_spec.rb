@@ -27,12 +27,14 @@ RSpec.describe Easify::Hr::ContactInformation, type: :model do
       it "should not allow missing contact type" do
           contact_information = build(:contact_information)
           contact_information.valid?
-          expect(contact_information.errors[:contact_type_id]).to include("can't be blank")
+          expect(contact_information.errors[:contact_type]).to include("can't be blank")
       end
  
       it "should not allow missing human resource" do
           contact_information = build(:contact_information)
           contact_information.valid?
-          expect(contact_information.errors[:contact_type_id]).to include("can't be blank")
+          expect(contact_information.errors[:human_resource]).to include("can't be blank")
       end
+
+      it "returns human resource of type Easify::Hr::HumanResource"
 end

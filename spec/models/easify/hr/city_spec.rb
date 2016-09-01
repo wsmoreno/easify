@@ -58,4 +58,12 @@ RSpec.describe Easify::Hr::City, type: :model do
        city.valid?
        expect(city.errors[:name]).to include("has already been taken")
     end
+
+    it "returns human resource of type Easify::Hr::HumanResource"
+    it "returns relatives of type Easify::Hr::HumanResource"
+    it "returns references of type Easify::Hr::Reference"
+    it "returns companies of type Easify::Hr::Company"
+    it "returns schools of type Easify::Hr::School"
+    it "returns office locations of type Easify::Hr:OfficeLocation"
+    it "returns work experiences of type Easify::Hr::WorkExperience"  
 end

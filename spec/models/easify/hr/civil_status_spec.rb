@@ -34,4 +34,7 @@ RSpec.describe Easify::Hr::CivilStatus, type: :model do
         civil_status.valid?
         expect(civil_status.errors[:name]).to include("has already been taken")
      end
+
+     it "returns human resources of type Easify::Hr::HumanResource"
+
 end
