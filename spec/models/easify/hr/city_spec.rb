@@ -6,8 +6,8 @@ RSpec.describe Easify::Hr::City, type: :model do
        build(:city).save
     end
 
-    it "should have many Human Resources" do
-       association = Easify::Hr::City.reflect_on_association(:human_resources)
+    it "should have many employees" do
+       association = Easify::Hr::City.reflect_on_association(:employees)
        expect(association.macro).to be(:has_many)
     end
 
@@ -17,7 +17,7 @@ RSpec.describe Easify::Hr::City, type: :model do
     end
 
     it "should have many References" do
-       association = Easify::Hr::City.reflect_on_association(:references)
+       association = Easify::Hr::City.reflect_on_association(:character_references)
        expect(association.macro).to be(:has_many)
     end
 
@@ -59,11 +59,38 @@ RSpec.describe Easify::Hr::City, type: :model do
        expect(city.errors[:name]).to include("has already been taken")
     end
 
-    it "returns human resource of type Easify::Hr::HumanResource"
-    it "returns relatives of type Easify::Hr::HumanResource"
-    it "returns references of type Easify::Hr::Reference"
-    it "returns companies of type Easify::Hr::Company"
-    it "returns schools of type Easify::Hr::School"
-    it "returns office locations of type Easify::Hr:OfficeLocation"
-    it "returns work experiences of type Easify::Hr::WorkExperience"  
+    it "returns employees of type Easify::Hr::HumanResource" do
+       city = build(:city)
+       expect(city.employees.proxy_association.options[:class_name]).to eq("Easify::Hr::HumanResource")
+    end
+
+    it "returns relatives of type Easify::Hr::Relative" do
+       city = build(:city)
+       expect(city.relatives.proxy_association.options[:class_name]).to eq("Easify::Hr::Relative")
+    end
+ 
+    it "returns references of type Easify::Hr::Reference" do
+       city = build(:city)
+       expect(city.character_references.proxy_association.options[:class_name]).to eq("Easify::Hr::Reference")
+    end
+
+    it "returns companies of type Easify::Hr::Company" do
+       city = build(:city)
+       expect(city.companies.proxy_association.options[:class_name]).to eq("Easify::Hr::Company")
+    end
+
+    it "returns schools of type Easify::Hr::School" do
+       city = build(:city)
+       expect(city.schools.proxy_association.options[:class_name]).to eq("Easify::Hr::School")
+    end
+
+    it "returns office locations of type Easify::Hr:OfficeLocation" do
+        city = build(:city)
+        expect(city.office_locations.proxy_association.options[:class_name]).to eq("Easify::Hr::OfficeLocation")
+    end
+
+    it "returns work experiences of type Easify::Hr::WorkExperience" do
+       city = build(:city)
+       expect(city.work_experiences.proxy_association.options[:class_name]).to eq("Easify::Hr::WorkExperience")
+    end  
 end

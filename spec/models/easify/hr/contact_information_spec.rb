@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Easify::Hr::ContactInformation, type: :model do
    
-      it "should belong to Easify::Hr::HumanResources" do
-          association = Easify::Hr::ContactInformation.reflect_on_association(:human_resource)
+      it "should belong to a contact" do
+          association = Easify::Hr::ContactInformation.reflect_on_association(:contact)
           expect(association.macro).to be(:belongs_to)
       end   
 
@@ -30,11 +30,14 @@ RSpec.describe Easify::Hr::ContactInformation, type: :model do
           expect(contact_information.errors[:contact_type]).to include("can't be blank")
       end
  
-      it "should not allow missing human resource" do
+      it "should not allow missing contact" do
           contact_information = build(:contact_information)
           contact_information.valid?
-          expect(contact_information.errors[:human_resource]).to include("can't be blank")
+          expect(contact_information.errors[:contact]).to include("can't be blank")
       end
 
-      it "returns human resource of type Easify::Hr::HumanResource"
+      it "returns contact of type Easify::Hr::HumanResource" do
+          association = Easify::Hr::ContactInformation.reflect_on_association(:contact)
+          expect(association.options[:class_name]).to eq("Easify::Hr::HumanResource")
+      end
 end
