@@ -13,7 +13,7 @@ RSpec.describe Easify::Hr::Department, type: :model do
     end
 
     it "should have many Easify::Hr::HumanResources" do
-       association = Easify::Hr::Department.reflect_on_association(:human_resources)
+       association = Easify::Hr::Department.reflect_on_association(:staff)
        expect(association.macro).to be(:has_many)
     end
 
@@ -36,6 +36,13 @@ RSpec.describe Easify::Hr::Department, type: :model do
        expect(department.errors[:company]).to include("can't be blank")
     end
 
-    it "returns human resources of type Easify::Hr::HumanResource"
-    it "returns department head of type Easify::Hr::HumanResource"
+    it "returns staff of type Easify::Hr::HumanResource" do
+       department = build(:department)
+       expect(department.staff.proxy_association.options[:class_name]).to eq("Easify::Hr::HumanResource")
+    end
+
+    it "returns department head of type Easify::Hr::HumanResource" do
+       association = Easify::Hr::Department.reflect_on_association(:department_head)
+       expect(association.options[:class_name]).to eq("Easify::Hr::HumanResource")
+    end
 end

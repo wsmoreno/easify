@@ -7,7 +7,7 @@ RSpec.describe Easify::Hr::CivilStatus, type: :model do
      end
 
      it "should have many Human Resources" do
-        association = Easify::Hr::CivilStatus.reflect_on_association(:human_resources)
+        association = Easify::Hr::CivilStatus.reflect_on_association(:employees)
         expect(association.macro).to be(:has_many)
      end
 
@@ -35,6 +35,9 @@ RSpec.describe Easify::Hr::CivilStatus, type: :model do
         expect(civil_status.errors[:name]).to include("has already been taken")
      end
 
-     it "returns human resources of type Easify::Hr::HumanResource"
+     it "returns human resources of type Easify::Hr::HumanResource" do
+        civil_status = build(:civil_status)
+        expect(civil_status.employees.proxy_association.options[:class_name]).to eq("Easify::Hr::HumanResource")
+     end
 
 end
