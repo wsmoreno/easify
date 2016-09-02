@@ -35,4 +35,27 @@ RSpec.describe Easify::Hr::Country, type: :model do
         country.valid?
         expect(country.errors[:code]).to include("has already been taken")
      end
+
+     it "should be valid with name not blank" do
+        country = build(:country, name: "Philippines", code: "PH")
+        expect(country.errors[:name]).not_to include("can't be blank")
+     end
+
+     it "should be valid with code not blank" do
+        country = build(:country, name: "Philippines", code: "PH")
+        country.valid?
+        expect(country.errors[:code]).not_to include("can't be blank")
+     end
+ 
+     it "should be valid with unique name" do
+        country = build(:country, name: "United States of America", code: "US")
+        country.valid?
+        expect(country.errors[:name]).not_to include("has already been taken")
+     end
+
+     it "should be valid with unique code" do
+        country = build(:country, name: "United States of America", code: "US")
+        country.valid?
+        expect(country.errors[:code]).not_to include("has already been taken")
+     end
  end
