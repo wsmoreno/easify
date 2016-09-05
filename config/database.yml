@@ -17,6 +17,13 @@ default: &default
   password: unitrade
   socket: /var/run/mysqld/mysqld.sock
 
+
+proddb: &proddb
+  adapter: mysql2
+  encoding: utf8
+  host: easify.unitrade.local
+  port: 3306
+
 development:
   <<: *default
   database: easify_development
@@ -48,7 +55,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  <<: *proddb
   database: easify_production
   username: easify
-  password: <%= ENV['EASIFY_DATABASE_PASSWORD'] %>
+  password: Revelation2134
