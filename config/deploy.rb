@@ -1,3 +1,6 @@
+set :stage, :production
+server 'easify.unitrade.local', user: 'deploy', roles: %w{web app db}
+
 set :application, 'easify'
 set :repo_url, 'git@github.com:wsmoreno/easify.git'
 
