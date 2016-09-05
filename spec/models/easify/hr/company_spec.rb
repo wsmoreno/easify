@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Easify::Hr::Company, type: :model do
      
      before do
-        company = build(:company)
-        company.city = build(:city, name: "Pasig")
-        company.save
+        @company = build(:company)
+        @company.city = build(:city, name: "Pasig")
+        @company.save
      end
 
      it "should belong to a City" do
@@ -72,5 +72,40 @@ RSpec.describe Easify::Hr::Company, type: :model do
      it "returns departments of type Easify::Hr::Department" do
         company = build(:company)
         expect(company.departments.proxy_association.options[:class_name]).to eq("Easify::Hr::Department")
-     end     
+     end
+
+     it "should be valid with name provided" do
+        company = build(:company)
+        company.valid?
+        expect(company.errors[:name]).not_to include("can't be blank")
+     end
+
+     it "should be valid with unique name" do
+        company = build(:company, name: "Xin Tian Ti")
+        company.valid?
+        expect(company.errors[:name]).not_to include("has already been taken")
+     end
+
+     it "should be valid with address1 provided" do
+        company = build(:company)
+        company.valid?
+        expect(company.errors[:address1]).not_to include("can't be blank")
+     end
+
+     it "should be valid with tax identification number provided" do
+        company = build(:company)
+        company.valid?
+        expect(company.errors[:tax_identification_number]).not_to include("can't be blank")
+     end
+ 
+     it "should be valid with city provided" do
+        @company.valid?
+        expect(@company.errors[:city]).not_to include("can't be blank")
+     end
+
+     it "should be valid with start date provided" do
+        @company.valid?
+        expect(@company.errors[:start_date]).not_to include("can't be blank")
+     end 
+     
 end
