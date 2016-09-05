@@ -52,10 +52,10 @@ RSpec.describe Easify::Hr::OfficeLocation, type: :model do
       expect(office_location.errors[:phone_number]).to include("can't be blank")
    end
 
-   it "should not allow blank start date" do
-      office_location = build(:office_location, phone_number: nil)
+   it "should not allow blank city" do
+      office_location = build(:office_location, city: nil)
       office_location.valid?
-      expect(office_location.errors[:start_date]).to include("can't be blank")
+      expect(office_location.errors[:city]).to include("can't be blank")
    end
 
    it "should be valid with non-blank name" do
@@ -63,8 +63,36 @@ RSpec.describe Easify::Hr::OfficeLocation, type: :model do
       office_location.valid?
       expect(office_location.errors[:office_location]).not_to include("can't be blank")
    end
-   it "should be valid with non-blank company"
-   it "should be valid with non-blank address 1"
-   it "should be valid with non-blank phone number"
-   it "should be valid with non-blank start date"
+
+   it "should be valid with non-blank company" do
+      company = build(:company)
+      office_location = build(:office_location, company: company)
+      office_location.valid?
+      expect(office_location.errors[:company]).not_to include("can't be blank")
+   end
+  
+   it "should be valid with non-blank address 1" do
+      office_location = build(:office_location)
+      office_location.valid?
+      expect(office_location.errors[:address1]).not_to include("can't be blank")
+   end
+
+   it "should be valid with non-blank phone number" do
+      office_location = build(:office_location)
+      office_location.valid?
+      expect(office_location.errors[:phone_number]).not_to include("can't be blank")
+   end
+
+   it "should not allow blank start date" do
+      office_location = build(:office_location, start_date: nil)
+      office_location.valid?
+      expect(office_location.errors[:start_date]).to include("can't be blank")
+   end
+
+   it "should be valid with non-blank start date" do
+      office_location = build(:office_location)
+      office_location.valid?
+      expect(office_location.errors[:start_date]).not_to include("can't be blank")
+   end
+
 end
