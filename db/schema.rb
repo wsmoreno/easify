@@ -187,8 +187,10 @@ ActiveRecord::Schema.define(version: 20160815084704) do
   create_table "easify_hr_office_locations", force: :cascade do |t|
     t.string   "name",                 limit: 255
     t.string   "address1",             limit: 255
-    t.string   "address",              limit: 255
+    t.string   "address2",             limit: 255
     t.string   "phone_number",         limit: 255
+    t.date     "start_date"
+    t.date     "end_date"
     t.integer  "easify_hr_city_id",    limit: 4
     t.integer  "easify_hr_company_id", limit: 4
     t.datetime "created_at",                       null: false
