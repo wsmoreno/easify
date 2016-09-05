@@ -17,4 +17,8 @@ RSpec.describe Easify::Devise::User, type: :model do
        user.valid?
        expect(user.errors[:email]).to include("can't be blank")
     end
+
+    it "should be valid with non-blank email"
+    it "should not allow invalid email"
+    it "should be valid with correct email format"
 end

@@ -185,16 +185,18 @@ ActiveRecord::Schema.define(version: 20160815084704) do
   add_index "easify_hr_human_resources", ["supervisor_id"], name: "fk_rails_5327202ad2", using: :btree
 
   create_table "easify_hr_office_locations", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "address1",          limit: 255
-    t.string   "address",           limit: 255
-    t.string   "phone_number",      limit: 255
-    t.integer  "easify_hr_city_id", limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "name",                 limit: 255
+    t.string   "address1",             limit: 255
+    t.string   "address",              limit: 255
+    t.string   "phone_number",         limit: 255
+    t.integer  "easify_hr_city_id",    limit: 4
+    t.integer  "easify_hr_company_id", limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "easify_hr_office_locations", ["easify_hr_city_id"], name: "index_easify_hr_office_locations_on_easify_hr_city_id", using: :btree
+  add_index "easify_hr_office_locations", ["easify_hr_company_id"], name: "index_easify_hr_office_locations_on_easify_hr_company_id", using: :btree
 
   create_table "easify_hr_references", force: :cascade do |t|
     t.string   "address1",                    limit: 255
@@ -332,7 +334,7 @@ ActiveRecord::Schema.define(version: 20160815084704) do
     t.string   "address1",                    limit: 255
     t.string   "address2",                    limit: 255
     t.text     "awards",                      limit: 65535
-    t.string   "company_name",                limit: 255
+    t.string   "employeer_name",              limit: 255
     t.date     "ending_period"
     t.decimal  "ending_salary",                             precision: 10
     t.string   "last_position",               limit: 255
@@ -404,6 +406,7 @@ ActiveRecord::Schema.define(version: 20160815084704) do
   add_foreign_key "easify_hr_human_resources", "easify_hr_religions"
   add_foreign_key "easify_hr_human_resources", "easify_sys_users"
   add_foreign_key "easify_hr_office_locations", "easify_hr_cities"
+  add_foreign_key "easify_hr_office_locations", "easify_hr_companies"
   add_foreign_key "easify_hr_references", "easify_hr_cities"
   add_foreign_key "easify_hr_references", "easify_hr_human_resources"
   add_foreign_key "easify_hr_relatives", "easify_hr_cities"

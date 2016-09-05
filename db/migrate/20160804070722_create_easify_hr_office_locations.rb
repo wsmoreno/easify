@@ -6,6 +6,7 @@ class CreateEasifyHrOfficeLocations < ActiveRecord::Migration
       t.string :address
       t.string :phone_number
       t.references :easify_hr_city, index: true, foreign_key: true
+      t.references :easify_hr_company, index: true, foreign_key: true
 
       t.timestamps null: false
     end
