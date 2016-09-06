@@ -346,8 +346,8 @@ ActiveRecord::Schema.define(version: 20160906031059) do
     t.string   "address1",                    limit: 255
     t.string   "address2",                    limit: 255
     t.text     "awards",                      limit: 65535
-    t.string   "employeer_name",              limit: 255
-    t.date     "ending_period"
+    t.string   "employer_name",               limit: 255
+    t.date     "end_period"
     t.decimal  "ending_salary",                             precision: 10
     t.string   "last_position",               limit: 255
     t.text     "reason_for_leaving",          limit: 65535
