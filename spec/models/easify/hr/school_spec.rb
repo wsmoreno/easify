@@ -5,17 +5,21 @@ RSpec.describe Easify::Hr::School, type: :model do
   before do
      school = build(:school)
      city = build(:city)
+     level = build(:school_level)
+     type = build(:school_type)
      school.city = city
+     school.level = level
+     school.type = type
      school.save
   end
 
   it "belongs to a School Type" do
-     association = Easify::Hr::School.reflect_on_association(:school_type)
+     association = Easify::Hr::School.reflect_on_association(:type)
      expect(association.macro).to be(:belongs_to)
   end
 
   it "belongs to a School Level" do
-     association = Easify::Hr::School.reflect_on_association(:school_level)
+     association = Easify::Hr::School.reflect_on_association(:level)
      expect(association.macro).to be(:belongs_to)
   end
 
@@ -44,22 +48,61 @@ RSpec.describe Easify::Hr::School, type: :model do
   end
 
   it "should not allow blank school type" do 
-     school = build(:school, school_type: nil)
+     school = build(:school, type: nil)
      school.valid?
-     expect(school.errors[:school_type]).to include("can't be blank")
+     expect(school.errors[:type]).to include("can't be blank")
   end
 
   it "should not allow blank school level" do
-     school = build(:school, school_level: nil)
+     school = build(:school, level: nil)
      school.valid?
-     expect(school.errors[:school_level]).to include("can't be blank")
+     expect(school.errors[:level]).to include("can't be blank")
   end 
 
-  it "should not allow duplicate names"
-  it "should be valid with unique name"
-  it "should be valid with non-blank name"
-  it "should be valid with non-blank address 1"
-  it "should be valid with non-blank city"
-  it "should be valid with non-blank school type"
-  it "should be valid with non-blank school level"
+  it "should not allow duplicates names" do
+     school = build(:school)
+     school.valid?
+     expect(school.errors[:name]).to include("has already been taken")
+  end
+
+
+  it "should be valid with unique name" do
+     school = build(:school, name: "Pamantasan ng Lungsod ng Maynila")
+     school.valid?
+     expect(school.errors[:name]).not_to include("has already been taken")
+  end
+
+  it "should be valid with non-blank name" do
+     school = build(:school)
+     school.valid?
+     expect(school.errors[:name]).not_to include("can't be blank")
+  end
+
+  it "should be valid with non-blank address 1" do
+     school = build(:school)
+     school.valid?
+     expect(school.errors[:address1]).not_to include("can't be blank")
+  end
+
+  it "should be valid with non-blank city" do
+     school = build(:school)
+     school.city = build(:city)
+     school.valid?
+     expect(school.errors[:city]).not_to include("can't be blank")
+  end
+
+  it "should be valid with non-blank school type" do
+     school = build(:school)
+     school.type = build(:school_type)
+     school.valid?
+     expect(school.errors[:type]).not_to include("can't be blank")
+  end  
+
+  it "should be valid with non-blank school level" do
+     school = build(:school)
+     school.level = build(:school_level)
+     school.valid?
+     expect(school.errors[:level]).not_to include("can't be blank")
+  end
+
 end
