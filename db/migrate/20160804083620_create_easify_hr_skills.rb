@@ -4,9 +4,8 @@ class CreateEasifyHrSkills < ActiveRecord::Migration
       t.string :description
       t.string :level
       t.string :name
-      t.string :skill_type
       t.references :easify_hr_human_resource, index: true, foreign_key: true
-
+     
       t.timestamps null: false
     end
   end

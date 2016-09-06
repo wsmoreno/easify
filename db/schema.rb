@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815084704) do
+ActiveRecord::Schema.define(version: 20160906031059) do
 
   create_table "easify_devise_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -295,17 +295,27 @@ ActiveRecord::Schema.define(version: 20160815084704) do
   add_index "easify_hr_schools", ["easify_hr_school_level_id"], name: "index_easify_hr_schools_on_easify_hr_school_level_id", using: :btree
   add_index "easify_hr_schools", ["easify_hr_school_type_id"], name: "index_easify_hr_schools_on_easify_hr_school_type_id", using: :btree
 
+  create_table "easify_hr_skill_types", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "easify_hr_skills", force: :cascade do |t|
     t.string   "description",                 limit: 255
     t.string   "level",                       limit: 255
     t.string   "name",                        limit: 255
-    t.string   "skill_type",                  limit: 255
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
+    t.integer  "easify_hr_skill_type_id",     limit: 4
   end
 
   add_index "easify_hr_skills", ["easify_hr_human_resource_id"], name: "index_easify_hr_skills_on_easify_hr_human_resource_id", using: :btree
+  add_index "easify_hr_skills", ["easify_hr_skill_type_id"], name: "skill_connect_to_types", using: :btree
 
   create_table "easify_hr_tenureships", force: :cascade do |t|
     t.date     "resignation_date"
@@ -418,6 +428,7 @@ ActiveRecord::Schema.define(version: 20160815084704) do
   add_foreign_key "easify_hr_schools", "easify_hr_school_levels"
   add_foreign_key "easify_hr_schools", "easify_hr_school_types"
   add_foreign_key "easify_hr_skills", "easify_hr_human_resources"
+  add_foreign_key "easify_hr_skills", "easify_hr_skill_types", name: "skill_connect_to_types"
   add_foreign_key "easify_hr_tenureships", "easify_hr_human_resources"
   add_foreign_key "easify_hr_trainings", "easify_hr_human_resources"
   add_foreign_key "easify_hr_work_experiences", "easify_hr_cities"
