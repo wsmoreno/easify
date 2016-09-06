@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Easify::Hr::WorkExperience, type: :model do
 
-
+   before do
+      work_experience = build(:work_experience)
+   end
+ 
 
    it "belongs to a Human Resource" do
       association = Easify::Hr::WorkExperience.reflect_on_association(:human_resource)
