@@ -12,7 +12,10 @@ RSpec.describe Easify::Hr::Relationship, type: :model do
       expect(association.macro).to be(:has_many)
    end
 
-   it "returns relatives of type Easify::Hr::Relatives"
+   it "returns relatives of type Easify::Hr::Relatives" do
+      relationship = build(:relationship)
+      expect(relationship.relatives.proxy_association.options[:class_name]).to eq("Easify::Hr::Relative")
+   end
    
    it "should not allow blank name" do
       relationship = build(:relationship, name: nil)

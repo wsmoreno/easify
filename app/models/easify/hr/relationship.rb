@@ -3,5 +3,5 @@ class Easify::Hr::Relationship < ActiveRecord::Base
     validates :description, presence: true
     validates :start_date, presence: true
 
-    has_many :relatives, class_name: "Easify::Hr::Relatives", foreign_key: "relationship_id"
+    has_many :relatives, class_name: "Easify::Hr::Relative", foreign_key: "relationship_id"
 end
