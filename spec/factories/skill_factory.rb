@@ -4,7 +4,6 @@ FactoryGirl.define do
      name "Microsoft Excel"
      description "Advance reporting in MS Excel"
      level "10"
-     start_date 1.year.ago 
   end
 
 end
