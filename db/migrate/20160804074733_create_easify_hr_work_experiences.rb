@@ -4,8 +4,8 @@ class CreateEasifyHrWorkExperiences < ActiveRecord::Migration
       t.string :address1
       t.string :address2
       t.text :awards
-      t.string :employeer_name
-      t.date :ending_period
+      t.string :employer_name
+      t.date :end_period
       t.decimal :ending_salary
       t.string :last_position
       t.text :reason_for_leaving
