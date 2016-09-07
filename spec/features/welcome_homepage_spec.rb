@@ -10,6 +10,7 @@ RSpec.feature "Users views the home page" do
       expect(page).to have_content "Contact Us"
       expect(page).to have_content "About Us"
       expect(page).to have_content "Help"
+      expect(page).to have_content "Easify"
    end
 
 end
