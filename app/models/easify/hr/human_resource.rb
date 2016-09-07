@@ -1,13 +1,13 @@
 class Easify::Hr::HumanResource < ActiveRecord::Base
   has_one :citizenship, class_name: "Easify::Hr::Citizenship", foreign_key: "citizenship_id"
   has_one :civil_status, class_name: "Easify::Hr::CivilStatus", foreign_key: "civil_status_id"
-  belongs_to :city, class_name: "Easify::Hr::City", foreign_key: "city_id"
+  belongs_to :city, class_name: "Easify::Hr::City", foreign_key: "easify_hr_city_id"
   belongs_to :religion, class_name: "Easify::Hr::Religion", foreign_key: "religion_id"
-  belongs_to :company, class_name: "Easify::Hr::Company", foreign_key: "company_id"
+  belongs_to :company, class_name: "Easify::Hr::Company", foreign_key: "easify_hr_company_id"
   belongs_to :department, class_name: "Easify::Hr::Department", foreign_key: "department_id"
   belongs_to :supervisor, class_name: "Easify::Hr::HumanResource"
   has_one :office_location, class_name: "Easify::Hr::OfficeLocation", foreign_key: "office_location_id"
-  has_one :user_account, class_name: "Easify::Devise::User", foreign_key: "devise_user_id"
+  belongs_to :user_account, class_name: "Easify::Devise::User", foreign_key: "devise_user_id"
 
   has_many :relatives, class_name: "Easify::Hr::Relatives", foreign_key: "easify_hr_human_resource_id"
   has_many :contact_informations, class_name: "Easify::Hr::ContactInformation", foreign_key: "easify_hr_human_resource_id"
