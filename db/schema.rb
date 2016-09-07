@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906031059) do
+ActiveRecord::Schema.define(version: 20160907083314) do
 
   create_table "easify_devise_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -200,6 +200,15 @@ ActiveRecord::Schema.define(version: 20160906031059) do
   add_index "easify_hr_office_locations", ["easify_hr_city_id"], name: "index_easify_hr_office_locations_on_easify_hr_city_id", using: :btree
   add_index "easify_hr_office_locations", ["easify_hr_company_id"], name: "index_easify_hr_office_locations_on_easify_hr_company_id", using: :btree
 
+  create_table "easify_hr_provinces", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "iso_code",   limit: 255
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "easify_hr_references", force: :cascade do |t|
     t.string   "address1",                    limit: 255
     t.string   "address2",                    limit: 255
@@ -217,6 +226,18 @@ ActiveRecord::Schema.define(version: 20160906031059) do
 
   add_index "easify_hr_references", ["easify_hr_city_id"], name: "index_easify_hr_references_on_easify_hr_city_id", using: :btree
   add_index "easify_hr_references", ["easify_hr_human_resource_id"], name: "index_easify_hr_references_on_easify_hr_human_resource_id", using: :btree
+
+  create_table "easify_hr_regions", force: :cascade do |t|
+    t.string   "name",                 limit: 255
+    t.string   "island_group",         limit: 255
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "easify_hr_country_id", limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "easify_hr_regions", ["easify_hr_country_id"], name: "index_easify_hr_regions_on_easify_hr_country_id", using: :btree
 
   create_table "easify_hr_relationships", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -421,6 +442,7 @@ ActiveRecord::Schema.define(version: 20160906031059) do
   add_foreign_key "easify_hr_office_locations", "easify_hr_companies"
   add_foreign_key "easify_hr_references", "easify_hr_cities"
   add_foreign_key "easify_hr_references", "easify_hr_human_resources"
+  add_foreign_key "easify_hr_regions", "easify_hr_countries"
   add_foreign_key "easify_hr_relatives", "easify_hr_cities"
   add_foreign_key "easify_hr_relatives", "easify_hr_human_resources"
   add_foreign_key "easify_hr_relatives", "easify_hr_relationships"
