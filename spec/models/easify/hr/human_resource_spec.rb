@@ -6,18 +6,20 @@ RSpec.describe Easify::Hr::HumanResource, type: :model do
         hr = build(:human_resource)
         hr.city = build(:city, name: "Caloocan")
         hr.company = build(:company)
+        hr.civil_status = build(:civil_status)
         hr.user_account = build(:user)
+        hr.citizenship = build(:citizenship)
         hr.save
      end
 
      it "should have a Citizenship" do
         association = Easify::Hr::HumanResource.reflect_on_association(:citizenship)
-        expect(association.macro).to be(:has_one)
+        expect(association.macro).to be(:belongs_to)
      end
 
      it "should have a Civil Status" do
         association = Easify::Hr::HumanResource.reflect_on_association(:civil_status)
-        expect(association.macro).to be(:has_one)
+        expect(association.macro).to be(:belongs_to)
      end
 
      it "could live in a City" do
@@ -106,20 +108,126 @@ RSpec.describe Easify::Hr::HumanResource, type: :model do
      end
 
 
-     it "should not allow blank first name"
-     it "should not allow blank middle name"
-     it "should not allow blank last name"
-     it "should not allow blank company"
-     it "should not allow blank birthdate"
-     it "should not allow blank citizenship"
-     it "should not allow blank civil status"
-     it "should not allow blank gender"
-     it "should be valid with non-blank first name"
-     it "should be valid with non-blank middle name"
-     it "should be valid with non-blank last name"
-     it "should be valid with non-blank company"
-     it "should be valid with non-blank birtdate"
-     it "should be valid with non-blank citizenship"
-     it "should be valid with non-blank civil status"
-     it "should be valid with non-blank gender"
+     it "should not allow full name duplicates" do
+        hr = build(:human_resource)
+        hr.valid?
+        expect(hr.errors[:first_name]).to include("has already been taken")
+     end
+
+     it "should be valid with same first name but different last name" do
+        hr = build(:human_resource, last_name: "Santiago")
+        hr.valid?
+        expect(hr.errors[:first_name]).not_to include("has already been taken")
+     end
+
+     it "should be valid with same first name but different middle name" do
+        hr = build(:human_resource, middle_name: "Dimalanta")
+        hr.valid?
+        expect(hr.errors[:first_name]).not_to include("has already been taken")
+     end
+
+     it "should be valid with a unique name" do
+        hr = build(:human_resource, first_name: "Armando", middle_name: "Delo Santos", last_name: "Estrada")
+        hr.valid?
+        expect(hr.errors[:first_name]).not_to include("has already been taken")
+     end
+
+     it "should not allow blank first name" do
+        hr = build(:human_resource, first_name: nil)
+        hr.valid?
+        expect(hr.errors[:first_name]).to include("can't be blank")
+     end
+
+     it "should not allow blank middle name" do
+        hr = build(:human_resource, middle_name: nil)
+        hr.valid?
+        expect(hr.errors[:middle_name]).to include("can't be blank")
+     end
+
+     it "should not allow blank last name" do
+        hr = build(:human_resource, last_name: nil)
+        hr.valid?
+        expect(hr.errors[:last_name]).to include("can't be blank")
+     end
+
+     it "should not allow blank company" do
+        hr = build(:human_resource, company: nil)
+        hr.valid?
+        expect(hr.errors[:company]).to include("can't be blank")
+     end
+
+     it "should not allow blank birthdate" do
+        hr = build(:human_resource, birthdate: nil)
+        hr.valid?
+        expect(hr.errors[:birthdate]).to include("can't be blank")
+     end
+
+     it "should not allow blank citizenship" do
+        hr = build(:human_resource, citizenship: nil)
+        hr.valid?
+        expect(hr.errors[:citizenship]).to include("can't be blank")
+     end 
+
+     it "should not allow blank civil status" do
+        hr = build(:human_resource, civil_status: nil)
+        hr.valid?
+        expect(hr.errors[:civil_status]).to include("can't be blank")
+     end 
+
+     it "should not allow blank gender" do
+        hr = build(:human_resource, gender: nil)
+        hr.valid?
+        expect(hr.errors[:gender]).to include("can't be blank")
+     end
+
+     it "should be valid with non-blank first name" do
+        hr = build(:human_resource)
+        hr.valid?
+        expect(hr.errors[:first_name]).not_to include("can't be blank")
+     end
+
+     it "should be valid with non-blank middle name" do
+        hr = build(:human_resource)
+        hr.valid?
+        expect(hr.errors[:middle_name]).not_to include("can't be blank")
+     end
+
+     it "should be valid with non-blank last name" do
+        hr = build(:human_resource)
+        hr.valid?
+        expect(hr.errors[:last_name]).not_to include("can't be blank")
+     end
+
+     it "should be valid with non-blank company" do
+        hr = build(:human_resource)
+        hr.company = build(:company)
+        hr.valid?
+        expect(hr.errors[:company]).not_to include("can't be blank")
+     end
+
+     it "should be valid with non-blank birthdate" do
+        hr = build(:human_resource)
+        hr.valid?
+        expect(hr.errors[:birthdate]).not_to include("can't be blank")
+     end
+
+     it "should be valid with non-blank citizenship" do
+        hr = build(:human_resource)
+        hr.citizenship = build(:citizenship)
+        hr.valid?
+        expect(hr.errors[:citizenship]).not_to include("can't be blank")
+     end
+
+     it "should be valid with non-blank civil status" do
+        hr = build(:human_resource)
+        hr.civil_status = build(:civil_status)
+        hr.valid?
+        expect(hr.errors[:civil_status]).not_to include("can't be blank")
+     end
+ 
+     it "should be valid with non-blank gender" do
+        hr = build(:human_resource)
+        hr.valid?
+        expect(hr.errors[:gender]).not_to include("can't be blank")
+     end
 end

@@ -1,7 +1,7 @@
 class CreateEasifyHrTenureships < ActiveRecord::Migration
   def change
     create_table :easify_hr_tenureships do |t|
-      t.date :resignation_date
+      t.date :date_discharge
       t.date :date_hired
       t.string :position
       t.string :job_description

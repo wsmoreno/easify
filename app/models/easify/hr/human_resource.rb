@@ -1,6 +1,15 @@
 class Easify::Hr::HumanResource < ActiveRecord::Base
-  has_one :citizenship, class_name: "Easify::Hr::Citizenship", foreign_key: "citizenship_id"
-  has_one :civil_status, class_name: "Easify::Hr::CivilStatus", foreign_key: "civil_status_id"
+  validates :first_name, presence: true, uniqueness: { scope: [:middle_name, :last_name] }
+  validates :middle_name, presence: true
+  validates :last_name, presence: true
+  validates :company, presence: true
+  validates :birthdate, presence: true
+  validates :citizenship, presence: true
+  validates :civil_status, presence: true
+  validates :gender, presence: true
+
+  belongs_to :citizenship, class_name: "Easify::Hr::Citizenship", foreign_key: "easify_hr_citizenship_id"
+  belongs_to :civil_status, class_name: "Easify::Hr::CivilStatus", foreign_key: "easify_hr_civil_status_id"
   belongs_to :city, class_name: "Easify::Hr::City", foreign_key: "easify_hr_city_id"
   belongs_to :religion, class_name: "Easify::Hr::Religion", foreign_key: "religion_id"
   belongs_to :company, class_name: "Easify::Hr::Company", foreign_key: "easify_hr_company_id"

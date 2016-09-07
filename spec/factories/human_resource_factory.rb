@@ -6,6 +6,8 @@ FactoryGirl.define do
        last_name    "Moreno"
        address1     "25 Tulya St. Blk. 11-G Phase III-C"
        address2     "Kaunlaran Village, Dagat-dagatan"
+       gender       "Male"
+       birthdate    34.years.ago
   end
 
 end

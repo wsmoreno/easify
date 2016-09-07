@@ -318,7 +318,7 @@ ActiveRecord::Schema.define(version: 20160906031059) do
   add_index "easify_hr_skills", ["easify_hr_skill_type_id"], name: "skill_connect_to_types", using: :btree
 
   create_table "easify_hr_tenureships", force: :cascade do |t|
-    t.date     "resignation_date"
+    t.date     "date_discharge"
     t.date     "date_hired"
     t.string   "position",                    limit: 255
     t.string   "job_description",             limit: 255
