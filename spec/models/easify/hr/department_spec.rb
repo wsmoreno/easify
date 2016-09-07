@@ -2,6 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Easify::Hr::Department, type: :model do
 
+    before do
+       @department = build(:department)
+       @department.company = build(:company, city: build(:city))
+       @department.department_head = build(:human_resource)
+       @department.save
+    end   
+
+
     it "should belong to a Easify::Hr::Company" do
        association = Easify::Hr::Department.reflect_on_association(:company)
        expect(association.macro).to be(:belongs_to)
@@ -16,6 +24,27 @@ RSpec.describe Easify::Hr::Department, type: :model do
        association = Easify::Hr::Department.reflect_on_association(:staff)
        expect(association.macro).to be(:has_many)
     end
+
+    it "should not allow duplicate names within the same company" do
+       department = build(:department)
+       department.company = @department.company
+       department.valid?
+       expect(department.errors[:name]).to include("has already been taken")
+    end
+
+    it "should allow duplicate names with different company" do
+       department = build(:department)
+       department.company = build(:company, name: "Xin Tian Ti", tax_identification_number: "999898383909", city: build(:city))
+       department.valid?
+       expect(department.errors[:name]).not_to include("has already been taken")
+    end
+
+    it "should allow unique names within a company" do
+       department = build(:department, name: "Accounting Department")
+       department.company = @department.company
+       department.valid?
+       expect(department.errors[:name]).not_to include("has already been taken")
+    end 
 
     it "should not allow blank name" do
        department = build(:department, name: "")

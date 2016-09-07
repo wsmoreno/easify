@@ -1,6 +1,6 @@
 class Easify::Hr::Department < ActiveRecord::Base
   validates :company, presence: true
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :company }
   validates :department_head, presence: true  
 
   belongs_to :company, class_name: "Easify::Hr::Company", foreign_key: "easify_hr_company_id"
