@@ -12,6 +12,8 @@ class CreateEasifySysUsers < ActiveRecord::Migration
       t.string :reset_digest
       t.date :reset_sent_at
       t.date :start_date
+      t.integer :created_by
+      t.integer :updated_by
 
       t.timestamps null: false
     end
