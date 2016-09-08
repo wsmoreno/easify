@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908012906) do
+ActiveRecord::Schema.define(version: 20160908091351) do
 
   create_table "easify_devise_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -226,15 +226,18 @@ ActiveRecord::Schema.define(version: 20160908012906) do
   add_index "easify_hr_office_locations", ["easify_hr_company_id"], name: "index_easify_hr_office_locations_on_easify_hr_company_id", using: :btree
 
   create_table "easify_hr_provinces", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "iso_code",   limit: 255
+    t.string   "name",                limit: 255
+    t.string   "iso_code",            limit: 255
     t.date     "start_date"
     t.date     "end_date"
-    t.integer  "created_by", limit: 4
-    t.integer  "updated_by", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "created_by",          limit: 4
+    t.integer  "updated_by",          limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "easify_hr_region_id", limit: 4
   end
+
+  add_index "easify_hr_provinces", ["easify_hr_region_id"], name: "province_connects_to_region", using: :btree
 
   create_table "easify_hr_references", force: :cascade do |t|
     t.string   "address1",                    limit: 255
@@ -501,6 +504,7 @@ ActiveRecord::Schema.define(version: 20160908012906) do
   add_foreign_key "easify_hr_human_resources", "easify_sys_users"
   add_foreign_key "easify_hr_office_locations", "easify_hr_cities"
   add_foreign_key "easify_hr_office_locations", "easify_hr_companies"
+  add_foreign_key "easify_hr_provinces", "easify_hr_regions", name: "province_connects_to_region"
   add_foreign_key "easify_hr_references", "easify_hr_cities"
   add_foreign_key "easify_hr_references", "easify_hr_human_resources"
   add_foreign_key "easify_hr_regions", "easify_hr_countries"
