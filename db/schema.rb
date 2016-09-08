@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907083314) do
+ActiveRecord::Schema.define(version: 20160908012906) do
 
   create_table "easify_devise_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -41,17 +41,24 @@ ActiveRecord::Schema.define(version: 20160907083314) do
   add_index "easify_devise_users", ["unlock_token"], name: "index_easify_devise_users_on_unlock_token", unique: true, using: :btree
 
   create_table "easify_hr_cities", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",                  limit: 255
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "created_by",            limit: 4
+    t.integer  "updated_by",            limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "easify_hr_province_id", limit: 4
   end
+
+  add_index "easify_hr_cities", ["easify_hr_province_id"], name: "index_easify_hr_cities_on_easify_hr_province_id", using: :btree
 
   create_table "easify_hr_citizenships", force: :cascade do |t|
     t.string   "name",                 limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",           limit: 4
+    t.integer  "updated_by",           limit: 4
     t.integer  "easify_hr_country_id", limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -64,6 +71,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -73,6 +82,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "address1",                  limit: 255
     t.string   "address2",                  limit: 255
     t.string   "tax_identification_number", limit: 255
+    t.integer  "created_by",                limit: 4
+    t.integer  "updated_by",                limit: 4
     t.integer  "easify_hr_city_id",         limit: 4
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
@@ -84,22 +95,26 @@ ActiveRecord::Schema.define(version: 20160907083314) do
 
   create_table "easify_hr_contact_informations", force: :cascade do |t|
     t.date     "end_date"
-    t.string   "number_or_address", limit: 255
+    t.string   "number_or_address",           limit: 255
     t.date     "start_date"
-    t.integer  "human_resource_id", limit: 4
-    t.integer  "contact_type_id",   limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "easify_hr_human_resource_id", limit: 4
+    t.integer  "easify_hr_contact_type_id",   limit: 4
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
-  add_index "easify_hr_contact_informations", ["contact_type_id"], name: "by_contact_type_id", using: :btree
-  add_index "easify_hr_contact_informations", ["human_resource_id"], name: "by_human_resource_id", using: :btree
+  add_index "easify_hr_contact_informations", ["easify_hr_contact_type_id"], name: "by_contact_type_id", using: :btree
+  add_index "easify_hr_contact_informations", ["easify_hr_human_resource_id"], name: "by_human_resource_id", using: :btree
 
   create_table "easify_hr_contact_types", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -109,6 +124,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "code",       limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by", limit: 4
+    t.integer  "updated_by", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -118,6 +135,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "department_head_id",   limit: 4
+    t.integer  "created_by",           limit: 4
+    t.integer  "updated_by",           limit: 4
     t.integer  "easify_hr_company_id", limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -135,6 +154,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "rank_in_class",               limit: 255
     t.text     "scholastic_honors",           limit: 65535
     t.string   "year_graduated",              limit: 255
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.integer  "easify_hr_school_id",         limit: 4
     t.datetime "created_at",                                               null: false
@@ -162,6 +183,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "tax_identification_number",    limit: 255
     t.string   "weight",                       limit: 255
     t.integer  "supervisor_id",                limit: 4
+    t.integer  "created_by",                   limit: 4
+    t.integer  "updated_by",                   limit: 4
     t.integer  "easify_hr_citizenship_id",     limit: 4
     t.integer  "easify_hr_city_id",            limit: 4
     t.integer  "easify_hr_civil_status_id",    limit: 4
@@ -191,6 +214,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "phone_number",         limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",           limit: 4
+    t.integer  "updated_by",           limit: 4
     t.integer  "easify_hr_city_id",    limit: 4
     t.integer  "easify_hr_company_id", limit: 4
     t.datetime "created_at",                       null: false
@@ -205,6 +230,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "iso_code",   limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by", limit: 4
+    t.integer  "updated_by", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -218,6 +245,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "middle_name",                 limit: 255
     t.string   "mobile_number",               limit: 255
     t.string   "phone_number",                limit: 255
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.integer  "easify_hr_city_id",           limit: 4
     t.datetime "created_at",                              null: false
@@ -229,9 +258,12 @@ ActiveRecord::Schema.define(version: 20160907083314) do
 
   create_table "easify_hr_regions", force: :cascade do |t|
     t.string   "name",                 limit: 255
+    t.string   "code",                 limit: 255
     t.string   "island_group",         limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",           limit: 4
+    t.integer  "updated_by",           limit: 4
     t.integer  "easify_hr_country_id", limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -244,6 +276,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -263,6 +297,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "mobile_number",               limit: 255
     t.string   "occupation",                  limit: 255
     t.string   "phone_number",                limit: 255
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.integer  "easify_hr_relationship_id",   limit: 4
     t.integer  "easify_hr_city_id",           limit: 4
@@ -279,6 +315,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -288,6 +326,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -297,6 +337,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -305,6 +347,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "name",                      limit: 255
     t.string   "address1",                  limit: 255
     t.string   "address2",                  limit: 255
+    t.integer  "created_by",                limit: 4
+    t.integer  "updated_by",                limit: 4
     t.integer  "easify_hr_city_id",         limit: 4
     t.integer  "easify_hr_school_level_id", limit: 4
     t.integer  "easify_hr_school_type_id",  limit: 4
@@ -321,6 +365,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -329,6 +375,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description",                 limit: 255
     t.string   "level",                       limit: 255
     t.string   "name",                        limit: 255
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -344,6 +392,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "position",                    limit: 255
     t.string   "job_description",             limit: 255
     t.string   "level",                       limit: 255
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -356,6 +406,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description",                 limit: 255
     t.string   "rating",                      limit: 255
     t.string   "venue",                       limit: 255
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -375,6 +427,8 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.text     "recognitions",                limit: 65535
     t.date     "start_period"
     t.decimal  "starting_salary",                           precision: 10
+    t.integer  "created_by",                  limit: 4
+    t.integer  "updated_by",                  limit: 4
     t.integer  "easify_hr_city_id",           limit: 4
     t.integer  "easify_hr_human_resource_id", limit: 4
     t.datetime "created_at",                                               null: false
@@ -389,21 +443,25 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "description", limit: 255
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "created_by",  limit: 4
+    t.integer  "updated_by",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
 
   create_table "easify_sys_user_roles", force: :cascade do |t|
-    t.integer  "easify_sys_user_id", limit: 4
-    t.integer  "easify_sys_role_id", limit: 4
+    t.integer  "easify_sys_role_id",    limit: 4
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "created_by",            limit: 4
+    t.integer  "updated_by",            limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "easify_devise_user_id", limit: 4
   end
 
+  add_index "easify_sys_user_roles", ["easify_devise_user_id"], name: "devise_user_connect_to_roles", using: :btree
   add_index "easify_sys_user_roles", ["easify_sys_role_id"], name: "index_easify_sys_user_roles_on_easify_sys_role_id", using: :btree
-  add_index "easify_sys_user_roles", ["easify_sys_user_id"], name: "index_easify_sys_user_roles_on_easify_sys_user_id", using: :btree
 
   create_table "easify_sys_users", force: :cascade do |t|
     t.boolean  "activated"
@@ -417,14 +475,17 @@ ActiveRecord::Schema.define(version: 20160907083314) do
     t.string   "reset_digest",      limit: 255
     t.date     "reset_sent_at"
     t.date     "start_date"
+    t.integer  "created_by",        limit: 4
+    t.integer  "updated_by",        limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
 
+  add_foreign_key "easify_hr_cities", "easify_hr_provinces"
   add_foreign_key "easify_hr_citizenships", "easify_hr_countries"
   add_foreign_key "easify_hr_companies", "easify_hr_cities"
-  add_foreign_key "easify_hr_contact_informations", "easify_hr_contact_types", column: "contact_type_id"
-  add_foreign_key "easify_hr_contact_informations", "easify_hr_human_resources", column: "human_resource_id"
+  add_foreign_key "easify_hr_contact_informations", "easify_hr_contact_types"
+  add_foreign_key "easify_hr_contact_informations", "easify_hr_human_resources"
   add_foreign_key "easify_hr_departments", "easify_hr_companies"
   add_foreign_key "easify_hr_departments", "easify_hr_human_resources", column: "department_head_id"
   add_foreign_key "easify_hr_educations", "easify_hr_human_resources"
@@ -455,7 +516,6 @@ ActiveRecord::Schema.define(version: 20160907083314) do
   add_foreign_key "easify_hr_trainings", "easify_hr_human_resources"
   add_foreign_key "easify_hr_work_experiences", "easify_hr_cities"
   add_foreign_key "easify_hr_work_experiences", "easify_hr_human_resources"
-  add_foreign_key "easify_sys_user_roles", "easify_devise_users", column: "easify_sys_user_id", name: "devise_user_connect_to_roles"
+  add_foreign_key "easify_sys_user_roles", "easify_devise_users", name: "devise_user_connect_to_roles"
   add_foreign_key "easify_sys_user_roles", "easify_sys_roles"
-  add_foreign_key "easify_sys_user_roles", "easify_sys_users"
 end

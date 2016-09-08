@@ -5,6 +5,8 @@ class CreateEasifyHrProvinces < ActiveRecord::Migration
       t.string     :iso_code
       t.date       :start_date
       t.date       :end_date
+      t.integer    :created_by
+      t.integer    :updated_by
 
       t.timestamps null: false
     end

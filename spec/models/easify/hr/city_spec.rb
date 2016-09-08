@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Easify::Hr::City, type: :model do
 
     before do
-       build(:city).save
+       city = build(:city)
+       city.province = build(:province)
+       city.save
     end
 
     it "should have many employees" do

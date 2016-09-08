@@ -4,6 +4,7 @@ class Easify::Hr::City < ActiveRecord::Base
       validates :name, presence: true, uniqueness: true
       validates :start_date, presence: true
 
+      belongs_to :province, class_name: "Easify::Hr::Province", foreign_key: "easify_hr_province_id"
       has_many :employees, class_name: "Easify::Hr::HumanResource", foreign_key: "easify_hr_city_id"
       has_many :relatives, class_name: "Easify::Hr::Relative", foreign_key: "easify_hr_city_id"
       has_many :character_references, class_name: "Easify::Hr::Reference", foreign_key: "easify_hr_city_id"           
