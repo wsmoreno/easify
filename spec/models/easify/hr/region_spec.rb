@@ -18,8 +18,15 @@ RSpec.describe Easify::Hr::Region, type: :model do
        expect(association.macro).to be(:has_many)
     end
 
-    it "should return a country of type Easify::Hr::Country"
-    it "should return provinces of type Easify::Province"
+    it "should return a country of type Easify::Hr::Country" do
+       association = Easify::Hr::Region.reflect_on_association(:country)
+       expect(association.options[:class_name]).to eq("Easify::Hr::Country")
+    end
+
+    it "should return provinces of type Easify::Hr::Province" do
+       association = Easify::Hr::Region.reflect_on_association(:provinces)
+       expect(association.options[:class_name]).to eq("Easify::Hr::Province")
+    end 
   
     it "should not allow blank name" do
        region = build(:region, name: nil)
