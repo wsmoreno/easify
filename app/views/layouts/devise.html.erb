@@ -1,0 +1,14 @@
+<html>
+      <head>
+            <title>Devise Layout</title>
+            <%= render "layouts/rails_default" %>
+            <%= render "layouts/shims" %>
+      </head>
+      <body>
+            <%= render "layouts/header" %>
+            <div class="container">
+                <br><br><br>
+                <%= yield %> 
+            </div>
+      </body>
+</html>
