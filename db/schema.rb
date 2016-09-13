@@ -81,9 +81,21 @@ ActiveRecord::Schema.define(version: 20160908091351) do
     t.string   "name",                      limit: 255
     t.string   "address1",                  limit: 255
     t.string   "address2",                  limit: 255
+    t.string   "address3",                  limit: 255
+    t.string   "email_primary",             limit: 255
+    t.string   "email_secondary",           limit: 255
+    t.string   "phone_number_primary",      limit: 255
+    t.string   "phone_number_secondary",    limit: 255
     t.string   "tax_identification_number", limit: 255
+    t.string   "fax_number",                limit: 255
+    t.string   "organization_logo",         limit: 255
+    t.string   "organization_description",  limit: 255
+    t.integer  "organization_head_id",      limit: 4
+    t.string   "registration_number",       limit: 255
+    t.string   "web_address",               limit: 255
     t.integer  "created_by",                limit: 4
     t.integer  "updated_by",                limit: 4
+    t.boolean  "is_active"
     t.integer  "easify_hr_city_id",         limit: 4
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
