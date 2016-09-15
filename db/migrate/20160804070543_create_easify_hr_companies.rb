@@ -5,8 +5,8 @@ class CreateEasifyHrCompanies < ActiveRecord::Migration
       t.string     :address1
       t.string     :address2
       t.string     :address3
-      t.string     :email_primary
-      t.string     :email_secondary
+      t.string     :email_address_primary
+      t.string     :email_address_secondary
       t.string     :phone_number_primary
       t.string     :phone_number_secondary
       t.string     :tax_identification_number

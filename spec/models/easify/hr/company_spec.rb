@@ -107,5 +107,27 @@ RSpec.describe Easify::Hr::Company, type: :model do
         @company.valid?
         expect(@company.errors[:start_date]).not_to include("can't be blank")
      end 
-     
+
+     it "should not allow blank primary email address" do
+        company = build(:company, email_address_primary: nil)
+        company.valid?
+        expect(company.errors[:email_address_primary]).to include("can't be blank")
+     end
+
+     it "should not allow blank primary phone number" do
+        company = build(:company, phone_number_primary: nil)
+        company.valid?
+        expect(company.errors[:phone_number_primary]).to include("can't be blank")
+     end
+     it "should be valid with non-blank primary email address" do
+	company = build(:company)
+        company.valid?
+        expect(company.errors[:email_address_primary]).not_to include("can't be blank")
+     end
+
+     it "should be valid with non-blank primary phone number" do
+         company = build(:company)
+         company.valid?
+         expect(company.errors[:phone_number_primary]).not_to include("can't be blank")
+     end     
 end

@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 20160908091351) do
     t.string   "address1",                  limit: 255
     t.string   "address2",                  limit: 255
     t.string   "address3",                  limit: 255
-    t.string   "email_primary",             limit: 255
-    t.string   "email_secondary",           limit: 255
+    t.string   "email_address_primary",     limit: 255
+    t.string   "email_address_secondary",   limit: 255
     t.string   "phone_number_primary",      limit: 255
     t.string   "phone_number_secondary",    limit: 255
     t.string   "tax_identification_number", limit: 255
