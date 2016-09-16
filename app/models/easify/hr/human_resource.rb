@@ -1,4 +1,6 @@
 class Easify::Hr::HumanResource < ActiveRecord::Base
+  mount_uploader :profile_picture, ProfilePictureUploader
+  mount_uploader :resume, ResumeUploader
   validates :first_name, presence: true, uniqueness: { scope: [:middle_name, :last_name] }
   validates :middle_name, presence: true
   validates :last_name, presence: true

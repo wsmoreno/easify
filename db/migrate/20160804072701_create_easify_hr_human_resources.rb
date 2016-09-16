@@ -19,7 +19,9 @@ class CreateEasifyHrHumanResources < ActiveRecord::Migration
       t.string     :weight
       t.integer    :supervisor_id
       t.integer    :created_by
-      t.integer    :updated_by      
+      t.integer    :updated_by 
+      t.string     :profile_picture
+      t.string     :resume     
       t.references :easify_hr_citizenship, index: true, foreign_key: true
       t.references :easify_hr_city, index: true, foreign_key: true
       t.references :easify_hr_civil_status, index: true, foreign_key: true

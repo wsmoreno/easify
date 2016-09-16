@@ -197,6 +197,8 @@ ActiveRecord::Schema.define(version: 20160908091351) do
     t.integer  "supervisor_id",                limit: 4
     t.integer  "created_by",                   limit: 4
     t.integer  "updated_by",                   limit: 4
+    t.string   "profile_picture",              limit: 255
+    t.string   "resume",                       limit: 255
     t.integer  "easify_hr_citizenship_id",     limit: 4
     t.integer  "easify_hr_city_id",            limit: 4
     t.integer  "easify_hr_civil_status_id",    limit: 4
